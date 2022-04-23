@@ -34,3 +34,11 @@ where FirstName='Remant' ;
 -- UC6- Retrieve Person belonging to a City or State
 select * from AddressBookTable
 where City='Dhanbad' or State='Jharkhand'
+
+-- UC 7: Ability to Retrieve Count of Person belonging to a City or State
+Insert into AddressBookTable(FirstName,SecondName,Address,City,State,zip,PhoneNumber,Email) 
+values('Sachin','Pratap','Sakchi','Jamshedpur','Jharkhand',835205,7903466210,'Sachin963@gmail.com')
+select Count(*) as Number_of_People,State,City 
+from AddressBookTable
+Group by State,City
+
