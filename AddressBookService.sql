@@ -30,3 +30,7 @@ where FirstName='Remant'
 --UC5- Delete Contact Person Based on their Name 
 delete from AddressBookTable
 where FirstName='Remant' ;
+
+-- UC6- Retrieve Person belonging to a City or State
+select * from AddressBookTable
+where City='Dhanbad' or State='Jharkhand'
