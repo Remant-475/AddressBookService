@@ -26,3 +26,7 @@ select * from AddressBookTable
 Update AddressBookTable
 set Email='remant444@gmail.com'
 where FirstName='Remant'
+
+--UC5- Delete Contact Person Based on their Name 
+delete from AddressBookTable
+where FirstName='Remant' ;
