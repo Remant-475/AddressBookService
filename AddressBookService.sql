@@ -42,3 +42,7 @@ select Count(*) as Number_of_People,State,City
 from AddressBookTable
 Group by State,City
 
+-- UC 8:  Retrieve Person retrieve entries sorted alphabetically by Person’s name by City
+select * from AddressBookTable
+where City='kolkata'
+order by(FirstName)
