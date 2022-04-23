@@ -21,3 +21,8 @@ values('Hemant','Mahato','Digwadih','Dhanbad','Jharkhand',828110,7979736171,'hem
 ('Shubham','Singh','Adarshnagar','Patna','Bihar',847451,790348851,'shubham510@gmail.com');
 
 select * from AddressBookTable
+
+ --UC4-Edit Contact Person Based on their Name 
+Update AddressBookTable
+set Email='remant444@gmail.com'
+where FirstName='Remant'
