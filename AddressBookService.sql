@@ -46,3 +46,21 @@ Group by State,City
 select * from AddressBookTable
 where City='kolkata'
 order by(FirstName)
+
+------ UC 9: Identify each Address Book with name andType ------
+
+alter table AddressBookTable
+add AddressBookName varchar(100),
+Type varchar(100)
+
+--Update values for Type=Friends--
+update AddressBookTable
+set AddressBookName='FriendName',Type='Friends'
+where FirstName='Aman' or FirstName='Sachin' or  FirstName='Shubham' 
+
+--Update values for Type=Profession--
+update AddressBookTable
+set AddressBookName='FamilyName',Type='Family'
+where FirstName='Hemant'
+
+
