@@ -63,4 +63,7 @@ update AddressBookTable
 set AddressBookName='FamilyName',Type='Family'
 where FirstName='Hemant'
 
-
+-- UC10- Get number of contact persons by Type
+Select Count(*) as Number_Of_Contacts,Type
+from AddressBookTable
+Group by Type
