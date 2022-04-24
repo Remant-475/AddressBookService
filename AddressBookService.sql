@@ -67,3 +67,10 @@ where FirstName='Hemant'
 Select Count(*) as Number_Of_Contacts,Type
 from AddressBookTable
 Group by Type
+
+--UC11-- Add person to friend and family
+insert into AddressBookTable(FirstName, SecondName, Address, City, State, Zip, PhoneNumber, Email, AddressBookName,Type)
+values
+('Rahul', 'Mahato', 'Ashoknagar', 'Ahmedabad', 'Gujarat', 382002, 9572846335, 'rahulmahato123@gmail.com','FriendBook', 'Friend'),
+('Kumud', 'Kumari', 'Bidhannagar', 'Durgapur', 'WB', 713212, 790456123, 'kumud963@gmail.com', 'FamilyBook','Family');
+select * from AddressBookTable;
