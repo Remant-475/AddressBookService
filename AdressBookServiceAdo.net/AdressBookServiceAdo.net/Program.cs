@@ -17,6 +17,7 @@ namespace AdressBookServiceAdo.net
                 Console.WriteLine("3: Get all details from AddressBook");
                 Console.WriteLine("4: Add Contact Details ");
                 Console.WriteLine("5: Edit ContactDetails");
+                Console.WriteLine("6: Delete ContactDetails");
                 Console.WriteLine("0: For Exit");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -87,6 +88,13 @@ namespace AdressBookServiceAdo.net
                         addressbook.State = State;
                         details.EditContact(addressbook);
                         Console.WriteLine("Contact is Edited");
+                        break;
+                    case 6:
+                        AddressBook delete = new AddressBook();
+                        Console.WriteLine("Enter a First Name For Delete The Contact");
+                        string first_name = Console.ReadLine();
+                        delete.FirstName = first_name;
+                        details.RemoveContact(delete);
                         break;
                 }
             }
