@@ -112,6 +112,35 @@ namespace AdressBookServiceAdo.net
                 throw new AddressException(AddressException.ExceptionType.Contact_Not_Add, "Contact are not added");
             }
         }
+        public bool EditContact(AddressBook address)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand("dbo.EditContactdetails", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", address.FirstName);
+                    command.Parameters.AddWithValue("@LastName", address.SecondName);
+                    command.Parameters.AddWithValue("@Address", address.Address);
+                    command.Parameters.AddWithValue("@City", address.City);
+                    command.Parameters.AddWithValue("@State", address.State);
+                    connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw new AddressException(AddressException.ExceptionType.Contact_Not_Add, "not add");
+                return false;
+            }
+        }
 
 
     }
