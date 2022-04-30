@@ -42,13 +42,12 @@ namespace AdressBookServiceAdo.net
                 }
             }
         }
-
-        public  List<AddressBook> GetContactDetails()
+        public List<AddressBook> GetContactDetails()
         {
             List<AddressBook> contactlist = new List<AddressBook>();
             AddressBook address = new AddressBook();
             SqlConnection connection = new SqlConnection(connectionString);
-            string Spname = "dbo.GetContactDetails";
+            string Spname = "dbo.GetallDetails";
             using (connection)
             {
                 SqlCommand sqlCommand = new SqlCommand(Spname, connection);
@@ -68,7 +67,7 @@ namespace AdressBookServiceAdo.net
                         address.zip = (int)reader.GetInt64(6);
                         address.PhoneNumber = (int)reader.GetInt64(7);
                         address.Email = reader.GetString(8);
-                        address.AddressBookName=reader.GetString(9);
+                        address.AddressBookName = reader.GetString(9);
                         address.Type = reader.GetString(10);
                         Console.WriteLine(address.FirstName + "," + address.SecondName + "," + address.PhoneNumber + "," + address.Email + "," + address.City);
 
@@ -77,42 +76,9 @@ namespace AdressBookServiceAdo.net
                 connection.Close();
             }
             return contactlist;
-        }
-        public bool AddContact(AddressBook address)
-        {
-            try
-            {
-                using (connection)
-                {
-                    SqlCommand sqlCommand = new SqlCommand("dbo.AddDetails", connection);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@FirstName", address.FirstName);
-                    sqlCommand.Parameters.AddWithValue("@Last_Name", address.SecondName);
-                    sqlCommand.Parameters.AddWithValue("@Address", address.Address);
-                    sqlCommand.Parameters.AddWithValue("@City", address.City);
-                    sqlCommand.Parameters.AddWithValue("@State", address.State);
-                    sqlCommand.Parameters.AddWithValue("@zip", address.zip);
-                    sqlCommand.Parameters.AddWithValue("@PhoneNumber", address.PhoneNumber);
-                    sqlCommand.Parameters.AddWithValue("@Email", address.Email);
-                    sqlCommand.Parameters.AddWithValue("@AddressBook_Name", address.AddressBookName);
-                    sqlCommand.Parameters.AddWithValue("@ContactType_Name", address.Type);
-                    connection.Open();
 
-                    var result = sqlCommand.ExecuteNonQuery();
-                    connection.Close();
-                    if (result != 0)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw new AddressException(AddressException.ExceptionType.Contact_Not_Add, "Contact are not added");
-            }
         }
-      
+        
     }
 }
 

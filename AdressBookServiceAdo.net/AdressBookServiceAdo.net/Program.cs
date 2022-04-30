@@ -14,6 +14,7 @@ namespace AdressBookServiceAdo.net
             {
                 Console.WriteLine("1: For Establish Connection");
                 Console.WriteLine("2: For Close Connection");
+                Console.WriteLine("3: Get all details from AddressBook");
                 Console.WriteLine("0: For Exit");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -26,7 +27,10 @@ namespace AdressBookServiceAdo.net
                         details.CloseConnection();
                         Console.WriteLine("Connection is closed");
                         break;
-                   
+                    case 3:
+                        details.GetContactDetails();
+                        break;
+
                 }
             }
             while (option != 0);
