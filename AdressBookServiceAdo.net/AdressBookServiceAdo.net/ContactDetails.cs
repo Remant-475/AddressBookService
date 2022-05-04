@@ -58,14 +58,14 @@ namespace AdressBookServiceAdo.net
                 {
                     while (reader.Read())
                     {
-                        address.ID = reader.GetString(0);
+                        address.ID = reader.GetInt32(0);
                         address.FirstName = reader.GetString(1);
                         address.SecondName = reader.GetString(2);
                         address.Address = reader.GetString(3);
                         address.City = reader.GetString(4);
                         address.State = reader.GetString(5);
-                        address.zip = reader.GetString(6);
-                        address.PhoneNumber = reader.GetString(7);
+                        address.zip = (int)reader.GetInt64(6);
+                        address.PhoneNumber = (int)reader.GetInt64(7);
                         address.Email = reader.GetString(8);
                         address.AddressBookName = reader.GetString(9);
                         address.Type = reader.GetString(10);
@@ -164,8 +164,53 @@ namespace AdressBookServiceAdo.net
                 Console.WriteLine(e.Message);
             }
         }
+        public void GetDataFromCityAndState(AddressBook address)
+        {
+            try
+            {
+                
+                using (connection)
+                {
+                    SqlCommand sqlCommand = new SqlCommand("dbo.GetContactdetailsByCityOrState", connection);
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue(@"City", address.City);
+                    sqlCommand.Parameters.AddWithValue(@"State", address.State);
+                    connection.Open();
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            address.ID = reader.GetInt32(0);
+                            address.FirstName = reader.GetString(1);
+                            address.SecondName = reader.GetString(2);
+                            address.Address = reader.GetString(3);
+                            address.City = reader.GetString(4);
+                            address.State = reader.GetString(5);
+                            address.zip = (int)reader.GetInt64(6);
+                            address.PhoneNumber = (int)reader.GetInt64(7);
+                            address.Email = reader.GetString(8);
+                            address.Type = reader.GetString(9);
+                            address.AddressBookName = reader.GetString(10);
+                            Console.WriteLine(address.ID + "," + address.FirstName + "," + address.SecondName + "," + address.Address + "," + address.City + ","
+                                + address.State + "," + address.zip + "," + address.PhoneNumber + "," + address.Email + "," + address.Type + "," + address.AddressBookName);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Data Found");
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
 
 
+        }   
     }
 }
 

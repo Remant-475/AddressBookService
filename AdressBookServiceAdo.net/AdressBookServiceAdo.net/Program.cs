@@ -18,6 +18,7 @@ namespace AdressBookServiceAdo.net
                 Console.WriteLine("4: Add Contact Details ");
                 Console.WriteLine("5: Edit ContactDetails");
                 Console.WriteLine("6: Delete ContactDetails");
+                Console.WriteLine("7: GetDetails By City Or State");
                 Console.WriteLine("0: For Exit");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -51,10 +52,10 @@ namespace AdressBookServiceAdo.net
                         string state = Console.ReadLine();
                         addressBook.State = state;
                         Console.WriteLine("Enter Zip");
-                        string zip = Console.ReadLine();
+                        int zip = int.Parse(Console.ReadLine());
                         addressBook.zip = zip;
                         Console.WriteLine("Enter PhoneNumber");
-                        string PhoneNum = Console.ReadLine();
+                        Int64 PhoneNum = Int64.Parse(Console.ReadLine());
                         addressBook.PhoneNumber = PhoneNum;
                         Console.WriteLine("Enter Email");
                         string Email = Console.ReadLine();
@@ -95,6 +96,16 @@ namespace AdressBookServiceAdo.net
                         string first_name = Console.ReadLine();
                         delete.FirstName = first_name;
                         details.RemoveContact(delete);
+                        break;
+                    case 7:
+                        AddressBook getData = new AddressBook();
+                        Console.Write("Enter the City Name:-");
+                        string cityname = Console.ReadLine();
+                        getData.City = cityname;
+                        Console.Write("Enter the State Name:-");
+                        string statename = Console.ReadLine();
+                        getData.State = statename;
+                        details.GetDataFromCityAndState(getData);
                         break;
                 }
             }
