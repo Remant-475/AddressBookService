@@ -19,6 +19,7 @@ namespace AdressBookServiceAdo.net
                 Console.WriteLine("5: Edit ContactDetails");
                 Console.WriteLine("6: Delete ContactDetails");
                 Console.WriteLine("7: GetDetails By City Or State");
+                Console.WriteLine("8: Get count by City or State");
                 Console.WriteLine("0: For Exit");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -106,6 +107,9 @@ namespace AdressBookServiceAdo.net
                         string statename = Console.ReadLine();
                         getData.State = statename;
                         details.GetDataFromCityAndState(getData);
+                        break;
+                    case 8:AddressBook book=new AddressBook();
+                        details.GetCountByCityOrState(book);
                         break;
                 }
             }

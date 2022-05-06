@@ -210,7 +210,45 @@ namespace AdressBookServiceAdo.net
             }
 
 
-        }   
+        }
+        public void GetCountByCityOrState(AddressBook address)
+        {
+            connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("SpGetCountByCityState", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            address.State = reader.GetString(0);
+                            address.City = reader.GetString(1);
+                            int count = reader.GetInt32(2);
+
+                            Console.WriteLine(address.State + "  " + address.City + "  " + count);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table is empty");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
 
