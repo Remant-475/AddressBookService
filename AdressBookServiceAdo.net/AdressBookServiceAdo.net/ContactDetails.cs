@@ -220,6 +220,7 @@ namespace AdressBookServiceAdo.net
                 {
                     SqlCommand command = new SqlCommand("SpGetCountByCityState", connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
+                   
                     connection.Open();
 
                     SqlDataReader reader = command.ExecuteReader();
@@ -282,6 +283,46 @@ namespace AdressBookServiceAdo.net
                 {
                     Console.WriteLine("No Data Found");
                 }
+                connection.Close();
+            }
+        }
+        public void GetCountByContactType(AddressBook address)
+        {
+            connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("dbo.CountByContactType", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(@"Type", address.Type);
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            
+                            
+                            var count = reader.GetInt32(0);
+
+
+                            Console.WriteLine("No Of Contacts " + count);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table is empty");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
                 connection.Close();
             }
         }

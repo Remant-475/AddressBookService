@@ -20,6 +20,8 @@ namespace AdressBookServiceAdo.net
                 Console.WriteLine("6: Delete ContactDetails");
                 Console.WriteLine("7: GetDetails By City Or State");
                 Console.WriteLine("8: Get count by City or State");
+                Console.WriteLine("9:Sort Contact Alphabatically By City");
+                Console.WriteLine("10:Count Contact By Contact Type");
                 Console.WriteLine("0: For Exit");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -118,6 +120,14 @@ namespace AdressBookServiceAdo.net
                         sort.City = City_name;
                         details.SortContactByUsingCity(sort);
                         break;
+                        case 10:
+                        AddressBook type = new AddressBook();
+                        Console.WriteLine("Enter Type of Contact");
+                        string ContactType= Console.ReadLine();
+                        type.Type= ContactType;
+                        details.GetCountByContactType(type);
+                        break;
+
                 }
             }
             while (option != 0);
