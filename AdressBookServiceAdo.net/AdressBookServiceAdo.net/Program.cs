@@ -111,6 +111,13 @@ namespace AdressBookServiceAdo.net
                     case 8:AddressBook book=new AddressBook();
                         details.GetCountByCityOrState(book);
                         break;
+                    case 9:
+                        AddressBook sort = new AddressBook();
+                        Console.WriteLine("Enter a City For Sort Contact");
+                        string City_name = Console.ReadLine();
+                        sort.City = City_name;
+                        details.SortContactByUsingCity(sort);
+                        break;
                 }
             }
             while (option != 0);

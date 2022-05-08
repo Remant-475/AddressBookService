@@ -249,6 +249,42 @@ namespace AdressBookServiceAdo.net
                 connection.Close();
             }
         }
+        public void SortContactByUsingCity(AddressBook address)
+        {
+            using (connection)
+            {
+                List<AddressBook> list = new List<AddressBook>();
+                SqlCommand cmd = new SqlCommand("dbo.SortContactAlphabetically", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue(@"City", address.City);
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        address.ID = reader.GetInt32(0);
+                        address.FirstName = reader.GetString(1);
+                        address.SecondName = reader.GetString(2);
+                        address.Address = reader.GetString(3);
+                        address.City = reader.GetString(4);
+                        address.State = reader.GetString(5);
+                        address.zip = (int)reader.GetInt64(6);
+                        address.PhoneNumber = reader.GetInt64(7);
+                        address.Email = reader.GetString(8);
+                        address.Type = reader.GetString(9);
+                        address.AddressBookName = reader.GetString(10);
+                        Console.WriteLine(address.ID + "," + address.FirstName + "," + address.SecondName + "," + address.Address + "," + address.City + ","
+                            + address.State + "," + address.zip + "," + address.PhoneNumber + "," + address.Email + "," + address.Type + "," + address.AddressBookName);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No Data Found");
+                }
+                connection.Close();
+            }
+        }
     }
 }
 
